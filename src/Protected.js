@@ -1,9 +1,13 @@
+import { useEffect } from 'react';
 import { Route, Navigate, Routes } from 'react-router-dom';
 
 function Protected({ isAuthenticated, children }) {
-  if (!isAuthenticated) {
-    return <Navigate to="/" replace />
-  }
+  useEffect(() => {
+    const username = localStorage.getItem('username');
+    if (!username) window.location.href = '/';
+  }, [])
+
+
   return children
 }
 
